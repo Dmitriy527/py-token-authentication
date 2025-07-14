@@ -160,3 +160,6 @@ class OrderViewSet(mixins.CreateModelMixin,
             return OrderListSerializer
 
         return OrderSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

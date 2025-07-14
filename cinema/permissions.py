@@ -11,4 +11,8 @@ class IsAdminOrIfAuthenticatedReadOnly(BasePermission):
             request.method in SAFE_METHODS
             and request.user
             and request.user.is_authenticated
-        ) or (request.user and request.user.is_staff)
+        ) or (
+            request.method in (
+                "GET", "PUT", "POST", "PATCH", "DELETE", "HEAD", "OPTIONS"
+            ),
+            request.user and request.user.is_staff)
